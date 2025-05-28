@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Productos</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/icono.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/formulario-excel.css') }}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Cargar jQuery desde una CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2><i class="fas fa-clipboard-list"></i> Registro de Nuevo Producto</h2>
+          <div class="d-flex gap-2">
+              <button onclick="history.back()" class="btn btn-success">Volver</button>
+              <button id="cerra-container" class="btn btn-danger">Cerrar contenedor</button>
+
+          </div>
+      </div>
+        <div class="card-body" id="seccion">
+          <div class="form-section">
+            <div class="section-title">
+              <i class="fas fa-sitemap"></i>Categorización del Producto
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="departamento">Departamento</label>
+                <select class="form-control" id="departamento">
+                  <option value="">Seleccione un departamento</option>
+                  {% for i in depto %}
+                    <option value="{{ i.0 }}">{{ i.1 }}</option>
+                  {% endfor %}
+                </select>
+                <div id="selectedDepartamento" class="selected-value"></div> <!-- Aquí se mostrará el valor -->
+              </div>
+
+              <div class="form-group">
+                <label for="grupoSelect">Grupo</label>
+                <select class="form-control" id="grupoSelect">
+                  <option value="">Seleccione un grupo</option>
+                </select>
+                <div id="selectedGrupo" class="selected-value"></div> <!-- Aquí se mostrará el valor -->
+              </div>
+
+              <div class="form-group">
+                <label for="subgrupo">Subgrupo</label>
+                <select class="form-control" id="subgrupo">
+                  <option value="">Seleccionar subgrupo</option>
+                </select>
+                <div id="selectedSubgrupo" class="selected-value"></div> <!-- Aquí se mostrará el valor -->
+              </div>
+
+              <div class="btn-group">
+                <button class="btn-consultar">Consultar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <div class="form-section">
+            <div class="section-title">
+              <i class="fas fa-info-circle"></i>Información Básica del Producto
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="barra">Código de Barra</label>
+                <input type="text" class="form-control" id="barra" placeholder="Ej. 7501234567890" required />
+              </div>
+              <div class="form-group">
+                <label for="codigoTio">Código TIO</label>
+                <input type="text" class="form-control" id="codigoTio" placeholder="Código interno" />
+              </div>
+              <div class="form-group">
+                <label for="producto">Producto</label>
+                <input type="text" class="form-control" id="producto" placeholder="Nombre del producto" required />
+              </div>
+              <div class="form-group">
+                <label for="marca">Marca</label>
+                <input type="text" class="form-control" id="marca" placeholder="Marca del producto" required />
+              </div>
+              <div class="form-group">
+                <label for="modelo">Model <small>(Container)</small></label> 
+                <input type="text" class="form-control" id="modelo" placeholder="Modelo del producto" />
+              </div>
+              <div class="form-group">
+                <label for="empaque">Empaque</label>
+                <input type="text" class="form-control" id="empaque" placeholder="Cantidad del empaque" />
+              </div>
+              <div class="form-group">
+                <label for="empaque">Proveedor</label>
+                <input type="text" class="form-control" id="proveedor" placeholder="Nombre del proveedor" />
+              </div>
+            </div>
+            <div class="form-group" style="display: flex; align-items: center; justify-content: center;"> 
+            <form class="file-upload-form" action="/form/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+              <label for="file" class="file-upload-label">
+                <div class="file-upload-design">
+                  <svg viewBox="0 0 640 512" height="1em">
+                    <path
+                      d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
+                    ></path>
+                  </svg>
+                  <p>Buscar plantilla</p>
+                  <p></p>
+                  <span class="browse-button">Buscar Archivo</span>
+                  <span id="file-name">Ningún archivo seleccionado</span>
+                </div>
+                <label for="file">Selecciona un archivo Excel (.xlsx):</label>
+                <input type="file" name="file" id="file" required>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  <button class="browse-button" type="submit">Subir</button>
+                </div>
+              </label>
+            </form>
+          </div>
+            
+          </div>
+          
+
+          <div class="actions">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success" id="update"><i class="fas fa-undo btn-icon"></i>Actualizar</button>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-success" id="exportExcelBtn"><i class="fas fa-save btn-icon"></i>Guardar</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2><i class="fas fa-table"></i>Productos Registrados</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table id="productsTable">
+              <thead>
+                <tr>
+                  <th>Código Barra</th>
+                  <th>Producto</th>
+                  <th>Empaque</th>
+                  <th>Costo</th>
+                  <th>Departamento</th>
+                  <th>Grupo</th>
+                  <th>SubGrupo</th>
+                  <th>Utilidad</th>
+                  <th>IVA</th>
+                  <th>Proveedor</th>
+                  <th>Tipo</th>
+                  <th>Modelo</th>
+                  <th>Moneda</th>
+                  <th>Codigo Tio</th>
+                  <th>Marca</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-body">
+                <!-- Products will be added here by JavaScript -->
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="pagination">
+            <button><i class="fas fa-angle-double-left"></i></button>
+            <button><i class="fas fa-angle-left"></i></button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button><i class="fas fa-angle-right"></i></button>
+            <button><i class="fas fa-angle-double-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification" id="notification">
+      <i class="fas fa-check-circle notification-icon"></i>
+      <span id="notificationMessage">Producto guardado correctamente</span>
+    </div>
+
+    <!-- Modal para ingresar el nombre del archivo Excel -->
+
+    <!-- Cargar el archivo JavaScript de formulario-excel.js -->
+    <script src="{{ url_for('static', filename='js/formulario-excel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+
+    <script> 
+    document.getElementById('file').addEventListener('change', function(event) {
+      const fileName = event.target.files.length > 0 ? event.target.files[0].name : 'Ningún archivo seleccionado';
+      document.getElementById('file-name').textContent = fileName;
+    });
+    </script>
+  </body>
+</html>

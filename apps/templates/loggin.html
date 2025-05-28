@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/loggins.css') }}" />
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/icono.ico') }}" type="image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<img class="wave" src= "{{ url_for('static', filename='img/wave.png') }}">
+	<div class="container">
+		<div class="img">
+			<img src="{{ url_for('static', filename='img/bg.svg') }}">
+		</div>
+		<div class="login-content">
+			<form id="formulario">
+				<img src=  "{{ url_for('static', filename='img/avatar.svg') }}">
+				<h2 class="title">Bienvenido</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Usuario</h5>
+           		   		<input type="text" class="input" name="Username" id="Username">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Contraseña</h5>
+           		    	<input type="password" class="input" name="password" id="password">
+            	   </div>
+            	</div>
+
+				<button class="btn" id="btn-enviar">Aceptar</button>
+            </form>
+			
+        </div>
+    </div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/loggin.js') }}"></script>
+</body>
+</html>

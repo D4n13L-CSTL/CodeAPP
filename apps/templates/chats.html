@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CorporateConnect | Chat Executivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles/chats.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+<body> 
+   
+    <div class="chat-container">
+
+
+
+        <!-- Sidebar más compacto -->
+        
+        <div class="sidebar" id="sidebar">
+            
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="logo-text">Tio Connect</div>
+                </div>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-avatar">{{iniciales}}</div>
+                <div class="user-info">
+                    <div class="user-name">{{user}}</div>
+                    <div class="user-status">
+                        <div class="status-dot"></div>
+                        <span>Disponible</span>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar conversaciones..." id="destinatario">
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="section-title">Activos</div>
+
+                </div>
+                <hr>
+                <a href="/" class="logout-btn">Salir</a>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Chat area más amplio -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <button class="hamburger-menu" onclick="toggleSidebar()">
+                    ☰
+                </button>
+                <div class="chat-avatar">
+                    <img src="{{ url_for('static', filename='img/avatar.png') }}" alt="Sarah Johnson">
+                </div>
+                <div class="chat-header-info">
+                    <div class="chat-header-name">Selecione un Chat</div>
+                    <div class="chat-header-status">
+                        <div class="status-dot"></div>
+                        <span></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="messages-container">
+                
+
+
+
+            </div>
+
+            <div class="input-area">
+                <div class="input-tools">
+
+                </div>
+
+                
+                <textarea id="chat_area" class="message-input" placeholder="Escribe un mensaje..."></textarea>
+                <button class="send-btn" onclick="enviarMensaje()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+	<script>const remitente_back = {{ user|tojson|safe }};</script>
+
+	<script>localStorage.setItem('usuario_actual', remitente_back)</script>
+	<script src="../static/js/chats.js"></script>
+
+    <script>
+        function toggleSidebar(forceClose = false) {
+    const sidebar = document.querySelector(".sidebar");
+    if (forceClose) {
+        sidebar.classList.remove("show"); // Cierra la sidebar si forceClose es true
+    } else {
+        sidebar.classList.toggle("show"); // Alterna la sidebar en móviles
+    }
+}
+
+// Cerrar sidebar al seleccionar un usuario
+document.addEventListener("click", (event) => {
+    if (event.target.closest(".menu-item")) {
+        toggleSidebar(true); // Cierra la sidebar cuando se selecciona un chat
+    }
+});
+    </script>
+</body>
+</html>

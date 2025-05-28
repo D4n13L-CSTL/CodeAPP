@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codificacion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='styles/icono.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/formulario.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/zebra.css') }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4">
+            <h2 class="title">Ficha de Departamentos</h2>
+            <div class="button-group">
+                
+                <a href="/"><button class="btn btn-primary btn-sm">Atras</button></a>
+            </div>
+        </div>
+        <div class="d-flex px-0">
+            <div class="col-md-3 me-4">        
+                    <h3>Departamento</h3>
+                    <select name="departamento" id="departamentoSelect"  >
+                        <option value="" disabled selected>SELECCIONA DEPARTAMENTO</option>
+                        {% for i in depto %}
+                            <option value="{{ i[0] }}">{{ i[1] }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <h3>Grupo</h3>
+                    
+                    <select name="grupo" id="grupoSelect" id="resultado">
+                 
+                        <option value="" >Seleccione un grupo</option>
+                 
+                    </select>    
+
+                    <h3>SubGrupo</h3>
+                        <select name="form_id" id="form_id">
+                        
+                            <option value=" ">Seleccione un Subgrupo</option>
+                            
+                        </select>
+                    
+                        <h4> {{ini_tio}}  </h4>    
+            </div>
+
+            <div class="col-md-8">
+                <div class="mb-4">
+                    <h3>Departamento</h3>
+                    <form action="" method="post" id="mainForm">
+
+                    
+                        <div class="mb-3">
+                            <label for="codigo-departamento" class="form-label">Código <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control input" id="codigo-departamento" placeholder="Ingrese el código" name="c_departamento">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion-departamento" class="form-label">Descripción <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="descripcion-departamento" placeholder="Ingrese la descripción">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="guia-licores-departamento">
+                            <label class="form-check-label" for="guia-licores-departamento">Aplica Guía de Licores</label>
+                        </div>
+                   
+                </div>
+                <div class="mb-4">
+                    <h3>Grupo</h3>
+                 
+                        <div class="mb-3">
+                            <label for="codigo-grupo" class="form-label">Código <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="codigo-grupo" placeholder="Ingrese el código" name="c_grupo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion-grupo" class="form-label">Descripción <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="descripcion-grupo" placeholder="Ingrese la descripción">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="guia-licores-grupo">
+                            <label class="form-check-label" for="guia-licores-grupo">Aplica Guía de Licores</label>
+                        </div>
+                    
+                </div>
+                <div class="mb-4" >
+                    <h3>Subgrupo</h3>
+                  
+                        <div class="mb-3">
+                            <label for="codigo-subgrupo" class="form-label">Código <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="codigo-subgrupo" placeholder="Ingrese el código" name="c_subgrupo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion-subgrupo" class="form-label">Descripción <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="descripcion-subgrupo" placeholder="Ingrese la descripción">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="guia-licores-subgrupo">
+                            <label class="form-check-label" for="guia-licores-subgrupo">Aplica Guía de Licores</label>
+                        </div>
+                        
+                    </form>
+                   
+                    <button class="button" id="showModal" style="width: 50%; margin-top: 20px;">
+                        Solicitar
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path
+                            fill-rule="evenodd"
+                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </button>
+                </div>
+            </div>
+            
+        </div>
+        
+        <ul id="results-list"></ul>
+    </div>
+    <script>const codigo_usuario = {{codigo|tojson|safe }};</script>
+    <script>const usuario_eti = {{usuario|tojson|safe }};</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/formulario.js') }}"></script>
+
+
+</body>
+</html>

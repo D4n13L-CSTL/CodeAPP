@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codificacion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="{{ url_for('static', filename='img/icono.ico') }}" type="image/x-icon">
+    <script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #343a40;
+        }
+        .navbar-nav {
+            flex-direction: row;
+        }
+        .navbar-nav .nav-link {
+            color: #343a40;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #007bff;
+        }
+        .app-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px;
+        }
+        .app-card {
+            width: 125px;
+            height: 125px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .app-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .app-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #343a40;
+        }
+        
+        a{
+      text-decoration: none;
+      color: white;
+    }
+ 
+    h1{
+        font-family: 'Arial', sans-serif; 
+        font-size: 3rem; 
+        color: #ffffff; 
+        background: linear-gradient(90deg, #3e4cf7 , #6974fb ); 
+        padding: 10px 20px; 
+        border-radius: 10px; 
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+        text-align: center;
+        letter-spacing: 5px;
+        
+    }
+
+/* Estilo para el botón */
+.scan-btn {
+    
+    gap: 10px; /* Espaciado entre el texto y el ícono */
+    background-color: #fff;
+    border: 2px solid #ddd; /* Borde gris claro */
+    border-radius: 8px; /* Esquinas ligeramente redondeadas */
+    padding: 10px 20px; /* Espaciado interno */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Color del texto */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 130px; /* Tamaño cuadrado del botón */
+    height: 130px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Efecto al pasar el mouse */
+.scan-btn:hover {
+    background-color: #f7f7f7; /* Fondo más claro */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Estilo del ícono */
+.scan-icon {
+    width: 50px; /* Ajusta el tamaño del ícono */
+    height: 50px;
+}
+
+/* Estilo del texto */
+.scan-btn span {
+    display: block;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a class="navbar-brand">
+                <img src="{{ url_for('static', filename='img/LOGO_VECTOR.png') }}" style="height: 60px; width: 90px;" alt="Logo">
+            </a>
+            <div class="d-flex gap-2">
+                <a href="/"><button class="btn btn-primary">Atrás</button></a>
+                <button class="btn btn-secondary" id="new_conted">Nuevo Contenedor</button>
+                <button class="btn btn-warning" id="edi-conte">Editar Contenedor</button>
+
+            </div>
+        </div>
+    </nav>
+    <header class="text-center py-4">
+        <h1>Codificacion</h1>
+        <h4><span  style="font-style: italic;">Contenedores</span></h4>
+        
+    </header>
+    <div class="container">
+        <div class="app-container">
+            <!-- Card 1 -->
+            {%if mesas_act == []%}
+            <h3>No Hay Contenedores Pendientes</h3>
+            {%else%}
+
+             {%for i in mesas_act%}
+            <a href="/form" class="app-link" data-value="{{ i.0 }}">
+            <div class="app-card">  
+                <div class="app-icon"><img src="{{ url_for('static', filename='img/documento.png') }}" alt="" width="50%"></div>
+                <div class="app-title">Contenedor : {{i.1}}<br> </div>  
+            </div>
+            </a>
+            {%endfor%}
+            {%endif%}
+            
+
+ 
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/mesas_work.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".app-link").forEach(link => {
+            link.addEventListener("click", function(event) {
+                let value = this.getAttribute("data-value");
+                localStorage.setItem("id_mesa", value);
+                let valor = localStorage.getItem('id_mesa')
+                console.log(valor);
+                
+            });
+        });
+    });
+    
+    </script>
+
+</body>
+</html>

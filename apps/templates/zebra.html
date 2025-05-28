@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codificacion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/zebra.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='styles/icono.ico') }}" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>
+
+    <style>
+        .row-no-wrap {
+            flex-wrap: nowrap;
+            font-size: 20px;
+        }
+        .col-md-8{
+            font-size: 20px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        #tabla-resultados{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4">
+            <h2>Impresion de Etiqueta</h2>
+            <div class="button-group">
+                
+                <a href="/"><button class="btn btn-primary">Salir</button></a>
+                <a href="/izebra/control"><button class="btn btn-success">Control Etiquetado</button></a>
+
+            
+             
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Productos</h5>
+                    
+                </div>
+                <div class="card-body">
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            
+                            <input style="text-transform: uppercase;" type="text" class="form-control me-2" placeholder="Ingrese el codigo..." id="codigo-input">
+                            <button class="btn btn-outline-primary" id="buscar-btn">
+                                <i class="bi bi-search"></i> Buscar
+                            </button>
+                            <button class="btn btn-outline-primary" id="camara" style="margin-left: 20px; width: auto;">
+                                <i class="bi bi-search"></i> Abrir Camara
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped" id="tabla-resultados" >
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Código</th>
+                                <th>Descripcion</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                           
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" class="text-center">No hay datos disponibles</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        
+                    <div id="qr-reader" style="display: none;"></div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+    <script>const host = {{host|tojson|safe }};</script>
+    <script src="{{ url_for('static', filename='js/zebra.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/camara_zebra.js') }}"></script>
+
+
+</body>
+</html>

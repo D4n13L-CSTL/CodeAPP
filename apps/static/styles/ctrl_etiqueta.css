@@ -1,0 +1,204 @@
+/* Elimina el scroll horizontal */
+body{
+    width: 100vw !important;
+    overflow-x: hidden !important;
+}
+  
+  
+@media (max-width: 768px) {
+    input.form-control {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 15px !important;
+        padding-right: 5px;
+    }
+
+    
+
+    .swal2-input {
+        height: 2rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+
+
+.row-no-wrap {
+    flex-wrap: nowrap;
+    font-size: 16px;
+}
+.col-md-8,
+.col-md-4 {
+    font-size: 15px;
+}
+
+/* Estilo para pantallas menores o iguales a 767px */
+@media (max-width: 767px) {
+.col-md-8,
+.col-md-4 {
+font-size: 15px;
+}
+
+
+
+}
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.swal2-html-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas */
+    gap: 20px; /* Espacio entre las columnas */
+    align-items: start; /* Alinea los elementos al inicio */
+}
+.swal2-input, .swal2-select {
+    width: 100%;
+    box-sizing: border-box;
+}
+.swal2-popup {
+    width: 80%; /* Ajusta el ancho del modal */
+}
+
+/* From Uiverse.io by satyamchaudharydev */ 
+.button {
+position: relative;
+transition: all 0.3s ease-in-out;
+box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+padding-block: 0.5rem;
+padding-inline: 1.25rem;
+background-color: rgb(0 107 179);
+border-radius: 9999px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #ffff;
+gap: 10px;
+font-weight: bold;
+border: 3px solid #ffffff4d;
+outline: none;
+overflow: hidden;
+font-size: 15px;
+cursor: pointer;
+}
+
+.icon {
+width: 24px;
+height: 24px;
+transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+transform: scale(1.05);
+border-color: #fff9;
+}
+
+.button:hover .icon {
+transform: translate(4px);
+}
+
+.button:hover::before {
+animation: shine 1.5s ease-out infinite;
+}
+
+.button::before {
+content: "";
+position: absolute;
+width: 100px;
+height: 100%;
+background-image: linear-gradient(
+120deg,
+rgba(255, 255, 255, 0) 30%,
+rgba(255, 255, 255, 0.8),
+rgba(255, 255, 255, 0) 70%
+);
+top: 0;
+left: -100px;
+opacity: 0.6;
+}
+
+@keyframes shine {
+0% {
+left: -100px;
+}
+
+60% {
+left: 100%;
+}
+
+to {
+left: 100%;
+}
+}
+
+
+
+
+
+  /* Ajusta el tamaño del modal */
+  .custom-swal-popup {
+    width: 350px !important; /* Reduce el tamaño del modal */
+    padding: 15px !important;
+  }
+
+  /* Contenedor de los inputs */
+  .fecha-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .fecha-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fecha-container label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .fecha-container input {
+    width: 130px; /* Reduce el tamaño del input */
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .fecha-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+
+
+
+
+  .table-responsive {
+    max-height: 400px; /* Ajusta la altura máxima */
+    overflow-y: auto;
+    display: block;
+}
+
+#tabla-resultados {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabla-resultados thead {
+    position: sticky;
+    top: 0;
+    background: #343a40;
+    color: white;
+    z-index: 10;
+}

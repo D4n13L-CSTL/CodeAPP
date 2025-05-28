@@ -1,0 +1,664 @@
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #1abc9c;
+  --light-color: #f5f7fa;
+  --dark-color: #34495e;
+  --success-color: #27ae60;
+  --danger-color: #e74c3c;
+  --border-radius: 6px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f0f2f5;
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px; /* Asegura que el contenedor no se expanda demasiado */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre las tarjetas */
+  
+}
+
+.card {
+  width: 100%;
+  max-width: 1200px; /* Ajusta al mismo tamaño que el formulario */
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+  padding: 18px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Estilo para el botón "Crear Nuevo Excel" */
+.btn-excel {
+  padding: 12px 20px;
+  background-color: #1d6f42; /* Verde oscuro, similar al de Excel */
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el ícono y el texto */
+}
+
+.btn-excel:hover {
+  background-color: #165a34; /* Verde más oscuro al hacer hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-excel:active {
+  transform: translateY(0);
+}
+
+/* Estilo para el ícono dentro del botón */
+.btn-excel i {
+  font-size: 18px;
+}
+
+.btn-group {
+    height: 50px;
+    margin-top: 28px;
+}
+
+.btn-consultar {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.btn-consultar:hover {
+    background-color: #23425e;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.card-header h2 i {
+  margin-right: 10px;
+  color: var(--accent-color);
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--dark-color);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  transition: all 0.3s;
+  background-color: white;
+}
+
+.form-control:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+.form-control::placeholder {
+  color: #aaa;
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8.825L1.175 4 2.175 3l3.825 3.825L9.825 3l1 1L6 8.825z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 35px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #243442;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  background-color: #217dbb;
+}
+
+.btn-success {
+  background-color: var(--success-color);
+}
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.btn-success:hover {
+  background-color: #1e8449;
+}
+
+.btn-icon {
+  margin-right: 8px;
+}
+
+.btn-ic {
+    margin-right: 8px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-active {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: var(--success-color);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.card-footer {
+  padding: 16px 24px;
+  background-color: #f9fafb;
+  border-top: 1px solid #eee;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pagination button {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #f5f7fa;
+}
+
+.pagination button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--success-color);
+  color: white;
+  padding: 15px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transform: translateX(200%);
+  transition: transform 0.3s ease-out;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.section-title i {
+  margin-right: 8px;
+  color: var(--accent-color);
+}
+
+.section-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 24px 0;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-container .form-control {
+  cursor: pointer;
+}
+
+.dropdown-indicator {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none;
+}
+
+/* Estilos para el modal */
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 400px; /* Ancho máximo del modal */
+  position: relative;
+}
+
+/* Estilo para el botón de cerrar el modal */
+.close-modal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+  color: var(--dark-color);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-modal:hover {
+  color: var(--danger-color); /* Rojo al hacer hover */
+}
+
+/* Estilo para el título del modal */
+.modal-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-content h3 i {
+  color: var(--success-color); /* Verde para el ícono de Excel */
+}
+
+/* Estilo para el formulario dentro del modal */
+#nombreExcelForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Estilo para el botón de crear Excel dentro del modal */
+#nombreExcelForm .btn-excel {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Estilo para el contenedor del nombre del archivo Excel */
+.excel-name-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(39, 174, 96, 0.1); /* Fondo verde claro */
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(39, 174, 96, 0.2); /* Borde verde claro */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  flex-grow: 1; /* Permite que el contenedor ocupe el espacio disponible */
+  max-width: 300px; /* Limita el ancho máximo para que no se vea demasiado grande */
+  text-align: center; /* Centra el texto dentro del contenedor */
+}
+
+.excel-name-container i {
+  color: var(--success-color); /* Ícono verde */
+}
+
+#excelName {
+  font-weight: 500;
+  color: whitesmoke;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que excede el contenedor */
+  text-overflow: ellipsis; /* Muestra "..." si el texto es demasiado largo */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .form-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn-group {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Custom styles for table */
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-actions button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.edit-btn {
+  color: var(--secondary-color);
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.edit-btn:hover {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.delete-btn {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.delete-btn:hover {
+  background-color: rgba(231, 76, 60, 0.2);
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  max-width: 150px;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s;
+}
+
+.step.active .step-number {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.step.completed .step-number {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.step-label {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.step.active .step-label {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.steps-connection {
+  position: absolute;
+  height: 3px;
+  background-color: #e0e0e0;
+  width: 100%;
+  top: 16px;
+  left: 0;
+  z-index: 0;
+}
+
+.step-progress {
+  height: 100%;
+  width: 0;
+  background-color: var(--success-color);
+  transition: width 0.3s;
+}
+td:hover{
+  cursor: pointer;
+}
+
+
+
+/* From Uiverse.io by vinodjangid07 */ 
+.file-upload-form {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.file-upload-label input {
+  display: none;
+}
+.file-upload-label svg {
+  height: 50px;
+  fill: rgb(82, 82, 82);
+  margin-bottom: 20px;
+}
+.file-upload-label {
+  cursor: pointer;
+  background-color: #ebffe4;
+  padding: 30px 70px;
+  border-radius: 40px;
+  border: 2px dashed rgb(82, 82, 82);
+  box-shadow: 0px 0px 200px -50px #ebffe4;
+}
+.file-upload-design {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.browse-button {
+  background-color: rgb(82, 82, 82);
+  padding: 5px 15px;
+  border-radius: 10px;
+  color: white;
+  transition: all 0.3s;
+}
+.browse-button:hover {
+  background-color: rgb(14, 14, 14);
+}
+
+
+

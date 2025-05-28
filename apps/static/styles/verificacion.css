@@ -1,0 +1,249 @@
+.row-no-wrap {
+    flex-wrap: nowrap;
+    font-size: 16px;
+}
+.col-md-8,
+.col-md-4 {
+    font-size: 15px;
+}
+
+/* Estilo para pantallas menores o iguales a 767px */
+@media (max-width: 767px) {
+.col-md-6,
+.col-md-2 {
+font-size: 20px;
+}
+}
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.swal2-html-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas */
+    gap: 20px; /* Espacio entre las columnas */
+    align-items: start; /* Alinea los elementos al inicio */
+}
+.swal2-input, .swal2-select {
+    width: 80%;
+    box-sizing: border-box;
+}
+.swal2-popup {
+    width: 80%; /* Ajusta el ancho del modal */
+}
+/* From Uiverse.io by satyamchaudharydev */ 
+.button {
+position: relative;
+transition: all 0.3s ease-in-out;
+box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+padding-block: 0.5rem;
+padding-inline: 1.25rem;
+background-color: rgb(0 107 179);
+border-radius: 9999px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #ffff;
+gap: 10px;
+font-weight: bold;
+border: 3px solid #ffffff4d;
+outline: none;
+overflow: hidden;
+font-size: 15px;
+cursor: pointer;
+}
+
+.icon {
+width: 24px;
+height: 24px;
+transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+transform: scale(1.05);
+border-color: #fff9;
+}
+
+.button:hover .icon {
+transform: translate(4px);
+}
+
+.button:hover::before {
+animation: shine 1.5s ease-out infinite;
+}
+
+.button::before {
+content: "";
+position: absolute;
+width: 100px;
+height: 100%;
+background-image: linear-gradient(
+120deg,
+rgba(255, 255, 255, 0) 30%,
+rgba(255, 255, 255, 0.8),
+rgba(255, 255, 255, 0) 70%
+);
+top: 0;
+left: -100px;
+opacity: 0.6;
+}
+
+@keyframes shine {
+0% {
+left: -100px;
+}
+
+60% {
+left: 100%;
+}
+
+to {
+left: 100%;
+}
+}
+
+/* From Uiverse.io by gharsh11032000 */ 
+.radio-button-container {
+display: flex;
+align-items: center;
+gap: 24px;
+}
+
+.radio-button {
+display: inline-block;
+position: relative;
+cursor: pointer;
+}
+
+.radio-button__input {
+position: absolute;
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.radio-button__label {
+display: inline-block;
+padding-left: 30px;
+margin-bottom: 10px;
+position: relative;
+font-size: 15px;
+color: #272626;
+font-weight: 600;
+cursor: pointer;
+text-transform: uppercase;
+transition: all 0.3s ease;
+}
+
+.radio-button__custom {
+position: absolute;
+top: 0;
+left: 0;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+border: 2px solid #555;
+transition: all 0.3s ease;
+}
+
+.radio-button__input:checked + .radio-button__label .radio-button__custom {
+background-color: #4c8bf5;
+border-color: transparent;
+transform: scale(0.8);
+box-shadow: 0 0 20px #4c8bf580;
+}
+
+.radio-button__input:checked + .radio-button__label {
+color: #4c8bf5;
+}
+
+.radio-button__label:hover .radio-button__custom {
+transform: scale(1.2);
+border-color: #4c8bf5;
+box-shadow: 0 0 20px #4c8bf580;
+}
+
+/* From Uiverse.io by zymantas-katinas */ 
+.button2 {
+margin-top: 15px;
+position: relative;
+border: none;
+background: transparent;
+padding: 0;
+outline: none;
+cursor: pointer;
+font-family: sans-serif;
+}
+
+/* Shadow layer */
+.button2 .shadow {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 50%;
+background: rgba(0, 0, 0, 0.25);
+border-radius: 8px;
+transform: translateY(2px);
+transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+/* Edge layer */
+.button2 .edge {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 50%;
+border-radius: 8px;
+background: linear-gradient(
+to left,
+hsl(217, 33%, 16%) 0%,
+hsl(217, 33%, 32%) 8%,
+hsl(217, 33%, 32%) 92%,
+hsl(217, 33%, 16%) 100%
+);
+}
+
+/* Front layer */
+.button2 .front {
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 12px 28px;
+font-size: 1.25rem;
+color: white;
+background: hsl(217, 33%, 17%);
+border-radius: 8px;
+transform: translateY(-4px);
+transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+/* Hover and active states */
+.button2:hover .shadow {
+transform: translateY(4px);
+transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.button2:hover .front {
+transform: translateY(-6px);
+transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.button2:active .shadow {
+transform: translateY(1px);
+transition: transform 34ms;
+}
+
+.button2:active .front {
+transform: translateY(-2px);
+transition: transform 34ms;
+}
+
+/* Disable text selection */
+.button2 .front span {
+user-select: none;
+}
+
